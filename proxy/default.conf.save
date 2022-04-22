@@ -1,0 +1,17 @@
+events {
+
+	worker_connections	4096:
+
+}
+
+http {
+
+	server {
+
+	listen    443 ssl;         server_name ppabli.ddns.net;
+	}
+
+}
+        root /projects/GITHUB/portfolio/dist/portfolio;         ssl_certificate /certs/ppabli.ddns.net/fullchain.pem;         ssl_certificate_key /certs/ppabli.ddns.net/privkey.pem;         location / {             
+try_files $uri $uri/ /index.html?$query_string;             include /etc/nginx/mime.types;         }         location ~ \.css {             include /etc/nginx/mime.types;             add_header Content-Type text/css;
+        }

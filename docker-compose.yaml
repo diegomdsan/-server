@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  database:
+
+    image: postgres
+    environment:
+      - POSTGRES_USER=diego
+      - POSTGRES_PASSWORD=diego
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    container_name: database
+    hostname: database
+    restart: always
+    ports:
+      - "5432:5432"
+
+  portfolio:
+
+    image: nginx
+    volumes:
+
+      - ./proxy/default.conf:/etc/nginx/nginx.conf
+      - ./portfolio/:/server/portfolio
+
+    container_name: portfolio
+    hostname: portfolio
+    restart: always
+    ports:
+
+      - "8081:8081"
